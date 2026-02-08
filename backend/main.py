@@ -5,7 +5,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from app.config.logging_config import get_logger
 from app.config.database_config import Base, engine
-from app.controller import all_routers
+# from app.controller import all_routers
 from app.exception.exception_handler import add_exception_handler
 from app.config.config import settings
 
@@ -41,7 +41,7 @@ async def log_requests(request: Request, call_next):
 
 Base.metadata.create_all(bind=engine)
 
-app.include_router(all_routers)
+# app.include_router(all_routers)
 add_exception_handler(app)
 
 if __name__ == "__main__":
