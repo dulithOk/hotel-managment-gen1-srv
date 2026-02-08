@@ -5,9 +5,10 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from app.config.logging_config import get_logger
 from app.config.database_config import Base, engine
-# from app.controller import all_routers
+from app.controller import all_routers
 from app.exception.exception_handler import add_exception_handler
 from app.config.config import settings
+from app.config.base import *
 
 validate_config_vars()
 
@@ -16,9 +17,9 @@ logger = get_logger(class_name=__name__)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    description='People Fusion Organization Hierarchy Service API Documentation',
+    description='Hotel Management API Documentation',
     version="1.0",
-    title='Organization Hierarchy API',)
+    title='Hotel Management API',)
 
 
 app.add_middleware(
@@ -41,7 +42,7 @@ async def log_requests(request: Request, call_next):
 
 Base.metadata.create_all(bind=engine)
 
-# app.include_router(all_routers)
+app.include_router(all_routers)
 add_exception_handler(app)
 
 if __name__ == "__main__":
