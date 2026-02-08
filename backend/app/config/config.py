@@ -8,8 +8,8 @@ load_dotenv(dotenv_path=env_path)
 
 class Settings(BaseSettings):
     LOG_LEVEL: str = "DEBUG"
-    DATABASE_URL: str
-    SECRET_KEY: str
+    DATABASE_URL: str = "sqlite:///./hotel_admin.db"
+    SECRET_KEY: str = "a041bfa981a4fc7deeb47ada009a3238d94f6922c24bd56b2b97d4780524feb8"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     HOST: str = "0.0.0.0"
