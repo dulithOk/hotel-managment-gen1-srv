@@ -11,8 +11,16 @@ user_router = APIRouter(
 user_service = UserService()
 
 @user_router.post("/login")
-def login(response: Response, user_login: UserLogin, db: db_dependency):
-    """Authenticate user and return JWT token"""
+def login(
+    response: Response,
+    user_login: UserLogin,
+    db: db_dependency):
+    
+    """
+    Authenticate user and return JWT access token.
+    
+    Validates credentials and generates a token for authenticated requests.
+    """
     res = user_service.create_user(user_login=user_login, db=db)
     response.status_code = res.status_code
     return res

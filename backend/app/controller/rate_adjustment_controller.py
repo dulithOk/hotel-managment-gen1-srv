@@ -17,7 +17,13 @@ def get_rate_adjustments(
     room_type_id: int,
     db: db_dependency,
     current_user: User = Depends(get_current_user)
-):
+):  
+    
+    """
+    Get rate adjustment history for a room type.
+    
+    Returns all rate adjustments for a specific room type, ordered by effective date.
+    """
     res = rate_adjustment_service.get_rate_adjustments(
         db=db,
         room_type_id=room_type_id
@@ -32,7 +38,13 @@ def create_rate_adjustment(
     adjustment: RateAdjustmentCreate,
     db: db_dependency,
     current_user: User = Depends(get_current_user)
-):
+):  
+    """
+    Create a new rate adjustment.
+    
+    Records a rate adjustment for a room type with effective date and reason.
+    The adjustment amount will be applied to calculate the effective rate.
+    """
     res = rate_adjustment_service.create_rate_adjustment(
         db=db,
         adjustment_data=adjustment.dict()

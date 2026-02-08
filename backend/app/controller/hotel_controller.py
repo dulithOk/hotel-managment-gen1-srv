@@ -19,6 +19,11 @@ def get_hotels(
     db: db_dependency,
     current_user: User = Depends(get_current_user)):
     
+    """
+    Get all hotels.
+    
+    Returns a list of all hotels in the system.
+    """
     res = hotel_service.get_all_hotels(db=db)
     response.status_code = res.status_code
     return res
@@ -30,6 +35,11 @@ def get_hotel(
     db: db_dependency,
     current_user: User = Depends(get_current_user)):
     
+    """
+    Get hotel by ID.
+    
+    Returns detailed information about a specific hotel including room types.
+    """
     res = hotel_service.get_hotel(db=db, hotel_id=hotel_id)
     response.status_code = res.status_code
     return res
@@ -41,6 +51,11 @@ def create_hotel(
     db: db_dependency,
     current_user: User = Depends(get_current_user)):
     
+    """
+    Create a new hotel.
+    
+    Creates a hotel with the provided name, location, and description.
+    """
     res =  hotel_service.create_hotel(db=db, hotel_data=hotel.dict())
     response.status_code = res.status_code
     return res
@@ -53,6 +68,11 @@ def update_hotel(
     db:db_dependency,
     current_user: User = Depends(get_current_user)):
     
+    """
+    Update an existing hotel.
+    
+    Updates hotel information. Only provided fields will be updated.
+    """
     res = hotel_service.update_hotel(db=db, hotel_id=hotel_id, update_data=hotel_update.dict(exclude_unset=True))
     response.status_code = res.status_code
     return res
@@ -64,6 +84,11 @@ def delete_hotel(
     db: db_dependency,
     current_user: User = Depends(get_current_user)):
     
+    """
+    Delete a hotel.
+    
+    Permanently deletes a hotel and all associated room types.
+    """
     res =  hotel_service.delete_hotel(db=db, hotel_id=hotel_id)
     response.status_code = res.status_code
     return res
